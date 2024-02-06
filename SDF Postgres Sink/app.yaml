@@ -9,7 +9,7 @@ variables:
   - name: PG_DATABASE
     inputType: FreeText
     description: ''
-    defaultValue: ''
+    defaultValue: defaultdb
     required: false
   - name: PG_HOST
     inputType: FreeText
