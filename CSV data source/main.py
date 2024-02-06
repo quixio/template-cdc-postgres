@@ -1,6 +1,6 @@
 # Import the Quix Streams modules for interacting with Kafka:
 from quixstreams import Application
-from quixstreams.models.serializers.quix import JSONSerializer, SerializationContext
+from quixstreams.models.serializers.quix import SerializationContext, QuixSerializer
 
 # (see https://quix.io/docs/quix-streams/v2-0-latest/api-reference/quixstreams.html for more details)
 
@@ -14,7 +14,7 @@ import os
 # Create an Application
 app = Application.Quix(consumer_group="csv_sample", auto_create_topics=True)
 # Define a serializer for messages, using JSON Serializer for ease
-serializer = JSONSerializer()
+serializer = QuixSerializer()
 
 # Define the topic using the "output" environment variable
 topic_name = os.environ["output"]
