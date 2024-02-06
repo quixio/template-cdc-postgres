@@ -1,36 +1,35 @@
 import quixstreams as qx
 from quix_function import QuixFunction
 import os
-
-# Quix injects credentials automatically to the client.
-# Alternatively, you can always pass an SDK token manually as an argument.
-client = qx.QuixStreamingClient()
-
-print("Opening input topic")
-consumer_topic = client.get_topic_consumer(os.environ["input"])
+import psycopg2
+from psycopg2 import sql
 
 
-# read streams
-def read_stream(new_stream: qx.StreamConsumer):
-    print("New Stream read!")
+# Function to insert data into the database
+def insert_data(uid, stream_id, timestamp, data):
+    # Connect to your postgres DB
+    conn = psycopg2.connect(
+        dbname="your_dbname",
+        user="your_username",
+        password="your_password",
+        host="your_host",
+        port="your_port"
+    )
 
-    quix_function = QuixFunction(new_stream)
+    # Open a cursor to perform database operations
+    with conn.cursor() as cur:
+        # Prepare the INSERT statement
+        query = sql.SQL("""
+            INSERT INTO csv_data_parameter_data (uid, stream_id, "timestamp", "data")
+            VALUES (%s, %s, to_timestamp(%s), %s);
+        """)
 
-    # hookup callbacks to handle events
-    new_stream.on_stream_closed = quix_function.on_stream_closed_handler
-    new_stream.properties.on_changed = quix_function.on_stream_properties_changed_handler
-    new_stream.timeseries.create_buffer().on_data_released = quix_function.on_data_handler
-    new_stream.timeseries.on_definitions_changed = quix_function.on_parameter_definitions_changed_handler
-    new_stream.events.on_definitions_changed = quix_function.on_event_definitions_changed_handler
-    new_stream.events.on_data_received = quix_function.on_event_data_handler
+        # Execute the query
+        cur.execute(query, (uid, stream_id, timestamp, data))
 
+        # Commit the transaction
+        conn.commit()
 
-consumer_topic.on_stream_received = read_stream
+    # Close the connection
+    conn.close()
 
-# Hook up to termination signal (for docker image) and CTRL-C
-print("Listening to streams. Press CTRL-C to exit.")
-
-# Handle graceful exit
-qx.App.run()
-
-print("Exiting")
