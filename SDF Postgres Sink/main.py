@@ -2,14 +2,14 @@ from quixstreams import Application
 from quixstreams.models.serializers.quix import JsonDeserializer
 
 import os
-import psycopg2
+import psycopg2 as p2
 from psycopg2 import sql
 
 
 # Function to insert data into the database
 def insert_data(uid, stream_id, timestamp, data):
     # Connect to your postgres DB
-    conn = psycopg2.connect(
+    conn = p2.connect(
         dbname="your_dbname",
         user="your_username",
         password="your_password",
