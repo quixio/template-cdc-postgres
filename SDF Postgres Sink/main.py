@@ -51,7 +51,7 @@ def main():
 
     #sdf = sdf.update(lambda row: print(row))
 
-    app.run()
+    app.run(sdf)
 
 
 if __name__ == "__main__":
