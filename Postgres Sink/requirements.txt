@@ -1,2 +1,2 @@
-quixstreams==2.2.1a
+quixstreams==2.2.0a0
 psycopg2-binary
