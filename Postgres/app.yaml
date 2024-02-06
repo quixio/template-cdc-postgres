@@ -1,0 +1,46 @@
+name: Postgres
+language: python
+variables:
+  - name: input
+    inputType: InputTopic
+    description: This is the input topic
+    defaultValue: csv-data
+    required: true
+  - name: PG_HOST
+    inputType: FreeText
+    description: Host name of Postgres
+    defaultValue: pg-2d5ac3c4-quix-b98e.a.aivencloud.com
+    required: true
+  - name: PG_PORT
+    inputType: FreeText
+    description: Port of Postgres
+    defaultValue: 10180
+    required: true
+  - name: PG_USER
+    inputType: FreeText
+    description: Username of Postgres
+    defaultValue: avnadmin
+    required: true
+  - name: PG_PASSWORD
+    inputType: HiddenText
+    description: Password of Postgres
+    defaultValue: a
+    required: true
+  - name: PG_DATABASE
+    inputType: FreeText
+    description: Database name of Postgres
+    defaultValue: defaultdb
+    required: true
+  - name: PG_SCHEMA
+    inputType: FreeText
+    description: Schema name of Postgres
+    defaultValue: public
+    required: true
+  - name: MAX_QUEUE_SIZE
+    inputType: FreeText
+    description: Max queue size for the sink ingestion
+    defaultValue: 50
+    required: true
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: main.py
