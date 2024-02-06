@@ -24,7 +24,7 @@ variables:
   - name: PG_USERNAME
     inputType: FreeText
     description: ''
-    defaultValue: ''
+    defaultValue: avnadmin
     required: false
   - name: PG_PASSWORD
     inputType: FreeText
