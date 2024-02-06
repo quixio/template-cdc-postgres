@@ -64,16 +64,10 @@ def main():
         # Iterate over the data from CSV file
         for message_key, row_data in read_csv_file(file_path=csv_file_path):
             # Serialize row value to bytes
-            serialized_value = serializer(
-                value=row_data, ctx=SerializationContext(topic=topic.name)
-            )
+            serialized_value = serializer(value=row_data, ctx=SerializationContext(topic=topic.name))
 
             # publish the data to the topic
-            producer.produce(
-                topic=topic.name,
-                key=message_key,
-                value=serialized_value,
-            )
+            producer.produce(topic=topic.name, key=message_key, value=serialized_value,)
 
 
 if __name__ == "__main__":
