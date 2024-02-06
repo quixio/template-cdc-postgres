@@ -1,4 +1,3 @@
-import os
 from quixstreams import Application, State
 from quixstreams.models.serializers.quix import QuixDeserializer, QuixTimeseriesSerializer
 
