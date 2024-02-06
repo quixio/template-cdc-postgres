@@ -8,7 +8,7 @@ from psycopg2 import sql
 DB=os.getenv("PG_DATABASE")
 HOST=os.getenv("PG_HOST")
 PORT=os.getenv("PG_PORT")
-USER=os.getenv("PG_USER")
+USER=os.getenv("PG_USERNAME")
 PWD=os.getenv("PG_PWD")
 
 print(DB)
