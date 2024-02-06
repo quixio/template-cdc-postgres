@@ -1,4 +1,4 @@
-from quixstreams import Application, State
+from quixstreams import Application
 from quixstreams.models.serializers.quix import JsonDeserializer
 
 import os
