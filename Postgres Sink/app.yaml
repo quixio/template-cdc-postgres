@@ -1,0 +1,11 @@
+name: Postgres Sink
+language: python
+variables:
+  - name: input
+    inputType: InputTopic
+    description: The input topic to listen to
+    defaultValue: csv-data
+    required: true
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: quix_function.py
