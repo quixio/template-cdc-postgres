@@ -67,7 +67,7 @@ def main():
     sdf = app.dataframe(input_topic)
 
     # Here put transformation logic.
-    sdf = sdf.update(sink_to_pdb_with_conn, stateful=False)
+    sdf = sdf.update(sink_to_pdb_with_conn)
 
     #sdf = sdf.update(lambda row: print(row))
 
