@@ -14,7 +14,7 @@ variables:
   - name: PG_HOST
     inputType: FreeText
     description: ''
-    defaultValue: ''
+    defaultValue: pg-2d5ac3c4-quix-b98e.a.aivencloud.com
     required: false
   - name: PG_PORT
     inputType: FreeText
