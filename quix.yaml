@@ -55,7 +55,7 @@ deployments:
         inputType: HiddenText
         description: Password of Postgres
         required: true
-        value: a
+        value: {{PG_PASSWORD}}
       - name: PG_DATABASE
         inputType: FreeText
         description: Database name of Postgres
