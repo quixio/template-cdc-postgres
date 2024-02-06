@@ -45,7 +45,7 @@ def get_connection():
         port=PORT
     )
 
-def sink_to_pdb(row, conn):
+def sink_to_pdb(conn, row):
     insert_data(conn, row["Number"], "data-stream", row["Timestamp"], row["Name"])
 
     print(row)
