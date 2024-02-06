@@ -34,6 +34,9 @@ def insert_data(uid, stream_id, timestamp, data):
     # Close the connection
     conn.close()
 
+def sink_to_pdb(row):
+    print(row)
+
 def main():
     app = Application.Quix("transformation-v1", auto_offset_reset="latest")
 
@@ -42,6 +45,7 @@ def main():
     sdf = app.dataframe(input_topic)
 
     # Here put transformation logic.
+    sdf = sdf.update(sink_to_pdb)
 
     sdf = sdf.update(lambda row: print(row))
 
