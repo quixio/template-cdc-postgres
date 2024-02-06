@@ -12,6 +12,13 @@ USER=os.getenv("PG_USERNAME")
 PWD=os.getenv("PG_PASSWORD")
 
 
+print(DB)
+print(HOST)
+print(PORT)
+print(USER)
+print(PWD)
+
+
 def get_connection():
     # Connect to your postgres DB
     return p2.connect(
