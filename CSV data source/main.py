@@ -43,6 +43,8 @@ def read_csv_file(file_path: str):
             row_data = {header: row[header] for header in headers}
             row_data["Timestamp"] = time.time_ns()
             yield stream_id, row_data
+            time.sleep(1)
+
 
         print("All rows published")
 
