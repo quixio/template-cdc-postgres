@@ -42,7 +42,7 @@ def sink_to_pdb(row):
 def main():
     app = Application.Quix("transformation-v1", auto_offset_reset="latest")
 
-    input_topic = app.topic(os.environ["input"], value_deserializer=JsonDeserializer())
+    input_topic = app.topic(os.environ["input"], value_deserializer=JSONDeserializer())
 
     sdf = app.dataframe(input_topic)
 
