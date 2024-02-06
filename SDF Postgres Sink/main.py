@@ -12,19 +12,10 @@ USER=os.getenv("PG_USERNAME")
 PWD=os.getenv("PG_PASSWORD")
 
 # Function to insert data into the database
-def insert_data(uid, stream_id, nanoseconds_timestamp, data):
+def insert_data(conn, uid, stream_id, nanoseconds_timestamp, data):
 
     # Convert nanoseconds to seconds
     timestamp_seconds = nanoseconds_timestamp / 1e9
-
-    # Connect to your postgres DB
-    conn = p2.connect(
-        dbname=DB,
-        user=USER,
-        password=PWD,
-        host=HOST,
-        port=PORT
-    )
 
     # Open a cursor to perform database operations
     with conn.cursor() as cur:
@@ -44,13 +35,26 @@ def insert_data(uid, stream_id, nanoseconds_timestamp, data):
     conn.close()
 
 
-def sink_to_pdb(row):
-    insert_data(row["Number"], "data-stream", row["Timestamp"], row["Name"])
+def get_connection():
+    # Connect to your postgres DB
+    return p2.connect(
+        dbname=DB,
+        user=USER,
+        password=PWD,
+        host=HOST,
+        port=PORT
+    )
+
+def sink_to_pdb(row, conn):
+    insert_data(conn, row["Number"], "data-stream", row["Timestamp"], row["Name"])
 
     print(row)
 
 
 def main():
+
+    conn = get_connection()
+
     app = Application.Quix("transformation-v1", auto_offset_reset="earliest")
 
     input_topic = app.topic(os.environ["input"], value_deserializer=JSONDeserializer())
@@ -58,7 +62,7 @@ def main():
     sdf = app.dataframe(input_topic)
 
     # Here put transformation logic.
-    sdf = sdf.update(sink_to_pdb)
+    sdf = sdf.update(sink_to_pdb, stateful=False, conn)
 
     #sdf = sdf.update(lambda row: print(row))
 
