@@ -11,12 +11,6 @@ PORT=os.getenv("PG_PORT")
 USER=os.getenv("PG_USERNAME")
 PWD=os.getenv("PG_PASSWORD")
 
-print(DB)
-print(HOST)
-print(PORT)
-print(USER)
-print(PWD)
-
 # Function to insert data into the database
 def insert_data(uid, stream_id, nanoseconds_timestamp, data):
 
