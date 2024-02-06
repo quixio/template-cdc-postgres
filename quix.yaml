@@ -107,10 +107,10 @@ deployments:
         required: false
         value: avnadmin
       - name: PG_PASSWORD
-        inputType: FreeText
-        description: ''
-        required: false
-        value: ''
+        inputType: HiddenText
+        description: Password of Postgres
+        required: true
+        value: PG_PASSWORD
   - name: Postgres Connector - not working
     application: Postgres
     deploymentType: Service
