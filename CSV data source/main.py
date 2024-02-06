@@ -10,22 +10,14 @@ import random
 import time
 import os
 
+app = Application.Quix(consumer_group="csv_sample", auto_create_topics=True)  # Create an Application
+serializer = QuixSerializer()  # Define a serializer for messages, using JSON Serializer for ease
 
-# Create an Application
-app = Application.Quix(consumer_group="csv_sample", auto_create_topics=True)
-# Define a serializer for messages, using JSON Serializer for ease
-serializer = QuixSerializer()
-
-# Define the topic using the "output" environment variable
-topic_name = os.environ["output"]
+topic_name = os.environ["output"]  # Define the topic using the "output" environment variable
 topic = app.topic(topic_name)
 
-# Get the directory of the current script
-script_dir = os.path.dirname(os.path.realpath(__file__))
-# Construct the path to the CSV file
-csv_file_path = os.path.join(script_dir, "demo-data.csv")
-
-
+script_dir = os.path.dirname(os.path.realpath(__file__))  # Get the directory of the current script
+csv_file_path = os.path.join(script_dir, "demo-data.csv")  # Construct the path to the CSV file
 
 # this function loads the file and sends each row to the publisher
 def read_csv_file(file_path: str):
@@ -34,40 +26,26 @@ def read_csv_file(file_path: str):
     It returns a generator with stream_id and rows
     """
 
-    # Read the CSV file into a pandas.DataFrame
     print("CSV file loading.")
-    df = pd.read_csv(file_path)
+    df = pd.read_csv(file_path)  # Read the CSV file into a pandas.DataFrame
     print("File loaded.")
 
-    # Get the number of rows in the dataFrame for printing out later
-    row_count = len(df)
+    row_count = len(df)  # Get the number of rows in the dataFrame for printing out later
 
-    # Generate a unique ID for this data stream.
-    # It will be used as a message key in Kafka
-    stream_id = f"CSV_DATA_{str(random.randint(1, 100)).zfill(3)}"
+    stream_id = f"CSV_DATA_{str(random.randint(1, 100)).zfill(3)}"# Generate a unique ID for this data stream.  # It will be used as a message key in Kafka.
 
-    # Get the column headers as a list
-    headers = df.columns.tolist()
+    headers = df.columns.tolist()# Get the column headers as a list
 
-    # Continuously loop over the data
-    while True:
-        # Print a message to the console for each iteration
+    while True:  # Continuously loop over the data
         print(f"Publishing {row_count} rows.")
 
-        # Iterate over the rows and convert them to
         for _, row in df.iterrows():
-            # Create a dictionary that includes both column headers and row values
             row_data = {header: row[header] for header in headers}
-
-            # add a new timestamp column with the current data and time
             row_data["Timestamp"] = time.time_ns()
-
-            # Yield the stream ID and the row data
             yield stream_id, row_data
 
         print("All rows published")
 
-        # Wait a moment before outputting more data.
         time.sleep(1)
 
 
