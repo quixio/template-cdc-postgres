@@ -1,0 +1,46 @@
+name: Postgres CDC
+language: python
+variables:
+  - name: output
+    inputType: OutputTopic
+    description: This is the output topic
+    defaultValue: postgres-cdc-source
+    required: true
+  - name: PG_HOST
+    inputType: FreeText
+    description: Host name of Postgres
+    defaultValue: pg-2d5ac3c4-quix-b98e.a.aivencloud.com
+    required: true
+  - name: PG_PORT
+    inputType: FreeText
+    description: Port of Postgres
+    defaultValue: 10180
+    required: true
+  - name: PG_USER
+    inputType: FreeText
+    description: Username of Postgres
+    defaultValue: avnadmin
+    required: true
+  - name: PG_PASSWORD
+    inputType: HiddenText
+    description: Password of Postgres
+    defaultValue: a
+    required: true
+  - name: PG_DATABASE
+    inputType: FreeText
+    description: Database name of Postgres
+    defaultValue: defaultdb
+    required: true
+  - name: PG_SCHEMA
+    inputType: FreeText
+    description: Name of schema for CDC
+    defaultValue: public
+    required: true
+  - name: PG_TABLE
+    inputType: FreeText
+    description: Name of table for CDC
+    defaultValue: csv_data_parameter_data
+    required: true
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: main.py
