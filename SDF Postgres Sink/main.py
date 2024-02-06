@@ -18,7 +18,11 @@ print(USER)
 print(PWD)
 
 # Function to insert data into the database
-def insert_data(uid, stream_id, timestamp, data):
+def insert_data(uid, stream_id, nanoseconds_timestamp, data):
+
+    # Convert nanoseconds to seconds
+    timestamp_seconds = nanoseconds_timestamp / 1e9
+
     # Connect to your postgres DB
     conn = p2.connect(
         dbname=DB,
@@ -37,7 +41,7 @@ def insert_data(uid, stream_id, timestamp, data):
         """)
 
         # Execute the query
-        cur.execute(query, (uid, stream_id, timestamp, data))
+        cur.execute(query, (uid, stream_id, timestamp_seconds, data))
 
         # Commit the transaction
         conn.commit()
