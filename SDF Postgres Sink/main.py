@@ -53,6 +53,11 @@ def sink_to_pdb(row, conn):
 
 def main():
 
+
+    # Create a closure that takes a row and uses the conn from the outer scope
+    def sink_to_pdb_with_conn(row):
+        sink_to_pdb(conn, row)
+
     conn = get_connection()
 
     app = Application.Quix("transformation-v1", auto_offset_reset="earliest")
@@ -62,7 +67,7 @@ def main():
     sdf = app.dataframe(input_topic)
 
     # Here put transformation logic.
-    sdf = sdf.update(sink_to_pdb, stateful=False, conn)
+    sdf = sdf.update(sink_to_pdb_with_conn, stateful=False)
 
     #sdf = sdf.update(lambda row: print(row))
 
