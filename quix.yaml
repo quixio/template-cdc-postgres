@@ -121,6 +121,46 @@ deployments:
         description: Name of table for CDC
         required: true
         value: csv_data_parameter_data
+  - name: SDF Postgres Sink
+    application: SDF Postgres Sink
+    deploymentType: Service
+    version: 1f354d3aca1a2e167a151df0a9d38a95afe79c98
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: false
+        value: csv-data
+      - name: PG_DATABASE
+        inputType: FreeText
+        description: ''
+        required: false
+        value: defaultdb
+      - name: PG_HOST
+        inputType: FreeText
+        description: ''
+        required: false
+        value: pg-2d5ac3c4-quix-b98e.a.aivencloud.com
+      - name: PG_PORT
+        inputType: FreeText
+        description: ''
+        required: false
+        value: 10180
+      - name: PG_USERNAME
+        inputType: FreeText
+        description: ''
+        required: false
+        value: avnadmin
+      - name: PG_PASSWORD
+        inputType: FreeText
+        description: ''
+        required: false
+        value: ''
 
 # This section describes the Topics of the data pipeline
 topics:
