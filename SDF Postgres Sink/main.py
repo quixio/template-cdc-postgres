@@ -56,7 +56,13 @@ def main():
 
     # Create a closure that takes a row and uses the conn from the outer scope
     def sink_to_pdb_with_conn(row):
-        sink_to_pdb(conn, row)
+        try:
+            sink_to_pdb(conn, row)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        finally:
+            # Close the connection
+            conn.close()
 
     conn = get_connection()
 
