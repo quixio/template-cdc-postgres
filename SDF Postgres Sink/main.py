@@ -43,7 +43,7 @@ def insert_data(conn, uid, stream_id, nanoseconds_timestamp, data):
         conn.commit()
 
     # Close the connection
-    conn.close()
+    #conn.close()
 
 
 def sink_to_pdb(conn, row):
