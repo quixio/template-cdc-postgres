@@ -102,10 +102,10 @@ deployments:
         required: true
         value: avnadmin
       - name: PG_PASSWORD
-        inputType: HiddenText
+        inputType: Secret
         description: Password of Postgres
         required: true
-        value: PG_PASSWORD
+        secretKey: PG_PASSWORD
       - name: PG_DATABASE
         inputType: FreeText
         description: Database name of Postgres
@@ -157,10 +157,10 @@ deployments:
         required: false
         value: avnadmin
       - name: PG_PASSWORD
-        inputType: FreeText
-        description: ''
-        required: false
-        value: PG_PASSWORD
+        inputType: Secret
+        description: Password of Postgres
+        required: true
+        secretKey: PG_PASSWORD
 
 # This section describes the Topics of the data pipeline
 topics:
