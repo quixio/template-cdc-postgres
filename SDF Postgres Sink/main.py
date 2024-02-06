@@ -36,6 +36,8 @@ def insert_data(uid, stream_id, timestamp, data):
 
 
 def sink_to_pdb(row):
+    insert_data(row["Number"], "data-stream", row("Timestamp"), row["Name"])
+
     print(row)
 
 
