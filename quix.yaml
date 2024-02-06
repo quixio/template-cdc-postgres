@@ -102,10 +102,10 @@ deployments:
         required: true
         value: avnadmin
       - name: PG_PASSWORD
-        inputType: HiddenText
+        inputType: Secret
         description: Password of Postgres
         required: true
-        value: a
+        secretKey: PG_PASSWORD
       - name: PG_DATABASE
         inputType: FreeText
         description: Database name of Postgres
