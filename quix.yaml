@@ -124,7 +124,7 @@ deployments:
   - name: SDF Postgres - Simple
     application: SDF Postgres Sink
     deploymentType: Service
-    version: ef93fdf0a5740357e98b54588cec14890874a070
+    version: 5bd1984ed578c9244923710e1336915bf7000d29
     resources:
       cpu: 200
       memory: 500
