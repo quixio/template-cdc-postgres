@@ -63,7 +63,8 @@ def main():
             print(f"An error occurred: {e}")
         finally:
             # Close the connection
-            conn.close()
+            #conn.close()
+            pass
 
     conn = get_connection()
 
@@ -85,4 +86,5 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
+        conn.close()
         print("Exiting.")
