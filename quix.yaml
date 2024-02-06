@@ -71,6 +71,56 @@ deployments:
         description: Max queue size for the sink ingestion
         required: true
         value: 50
+  - name: Postgres CDC
+    application: Postgres CDC
+    deploymentType: Service
+    version: 81e38bc40c9a1b7375599b29bf9cfd0e90643f4e
+    resources:
+      cpu: 200
+      memory: 200
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: output
+        inputType: OutputTopic
+        description: This is the output topic
+        required: true
+        value: postgres-cdc-source
+      - name: PG_HOST
+        inputType: FreeText
+        description: Host name of Postgres
+        required: true
+        value: pg-2d5ac3c4-quix-b98e.a.aivencloud.com
+      - name: PG_PORT
+        inputType: FreeText
+        description: Port of Postgres
+        required: true
+        value: 10180
+      - name: PG_USER
+        inputType: FreeText
+        description: Username of Postgres
+        required: true
+        value: avnadmin
+      - name: PG_PASSWORD
+        inputType: HiddenText
+        description: Password of Postgres
+        required: true
+        value: a
+      - name: PG_DATABASE
+        inputType: FreeText
+        description: Database name of Postgres
+        required: true
+        value: defaultdb
+      - name: PG_SCHEMA
+        inputType: FreeText
+        description: Name of schema for CDC
+        required: true
+        value: public
+      - name: PG_TABLE
+        inputType: FreeText
+        description: Name of table for CDC
+        required: true
+        value: csv_data_parameter_data
 
 # This section describes the Topics of the data pipeline
 topics:
