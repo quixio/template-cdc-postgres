@@ -42,8 +42,6 @@ def insert_data(conn, uid, stream_id, nanoseconds_timestamp, data):
         # Commit the transaction
         conn.commit()
 
-    # Close the connection
-    #conn.close()
 
 
 def sink_to_pdb(conn, row):
@@ -61,10 +59,6 @@ def main():
             sink_to_pdb(conn, row)
         except Exception as e:
             print(f"An error occurred: {e}")
-        finally:
-            # Close the connection
-            #conn.close()
-            pass
 
     conn = get_connection()
 
@@ -74,10 +68,7 @@ def main():
 
     sdf = app.dataframe(input_topic)
 
-    # Here put transformation logic.
     sdf = sdf.update(sink_to_pdb_with_conn)
-
-    #sdf = sdf.update(lambda row: print(row))
 
     app.run(sdf)
 
