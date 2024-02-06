@@ -11,6 +11,12 @@ PORT=os.getenv("PG_PORT")
 USER=os.getenv("PG_USER")
 PWD=os.getenv("PG_PWD")
 
+print(DB)
+print(HOST)
+print(PORT)
+print(USER)
+print(PWD)
+
 # Function to insert data into the database
 def insert_data(uid, stream_id, timestamp, data):
     # Connect to your postgres DB
