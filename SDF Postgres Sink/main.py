@@ -11,6 +11,17 @@ PORT=os.getenv("PG_PORT")
 USER=os.getenv("PG_USERNAME")
 PWD=os.getenv("PG_PASSWORD")
 
+
+def get_connection():
+    # Connect to your postgres DB
+    return p2.connect(
+        dbname=DB,
+        user=USER,
+        password=PWD,
+        host=HOST,
+        port=PORT
+    )
+
 # Function to insert data into the database
 def insert_data(conn, uid, stream_id, nanoseconds_timestamp, data):
 
@@ -34,16 +45,6 @@ def insert_data(conn, uid, stream_id, nanoseconds_timestamp, data):
     # Close the connection
     conn.close()
 
-
-def get_connection():
-    # Connect to your postgres DB
-    return p2.connect(
-        dbname=DB,
-        user=USER,
-        password=PWD,
-        host=HOST,
-        port=PORT
-    )
 
 def sink_to_pdb(conn, row):
     insert_data(conn, row["Number"], "data-stream", row["Timestamp"], row["Name"])
