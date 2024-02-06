@@ -19,7 +19,7 @@ variables:
   - name: PG_PORT
     inputType: FreeText
     description: ''
-    defaultValue: ''
+    defaultValue: 10180
     required: false
   - name: PG_USERNAME
     inputType: FreeText
