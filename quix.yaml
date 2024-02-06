@@ -29,7 +29,7 @@ deployments:
       cpu: 200
       memory: 200
       replicas: 1
-    desiredStatus: Stopped
+    desiredStatus: Running
     variables:
       - name: input
         inputType: InputTopic
@@ -55,7 +55,7 @@ deployments:
         inputType: Secret
         description: Password of Postgres
         required: true
-        value: PG_PASSWORD
+        secretKey: PG_PASSWORD
       - name: PG_DATABASE
         inputType: FreeText
         description: Database name of Postgres
