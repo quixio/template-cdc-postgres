@@ -111,7 +111,7 @@ deployments:
         description: ''
         required: false
         value: PG_PASSWORD
-  - name: Postgres Connector - not working
+  - name: Postgres Connector - Library
     application: Postgres
     deploymentType: Service
     version: 5a93d6da95f4ceefa07485ac3ffc00d34b4f8732
@@ -142,10 +142,10 @@ deployments:
         required: true
         value: avnadmin
       - name: PG_PASSWORD
-        inputType: Secret
+        inputType: HiddenText
         description: Password of Postgres
         required: true
-        secretKey: PG_PASSWORD
+        value: PG_PASSWORD
       - name: PG_DATABASE
         inputType: FreeText
         description: Database name of Postgres
