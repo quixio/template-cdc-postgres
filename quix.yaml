@@ -21,56 +21,6 @@ deployments:
         description: Name of the output topic to write into
         required: true
         value: csv-data
-  - name: Postgres
-    application: Postgres
-    deploymentType: Service
-    version: 5a93d6da95f4ceefa07485ac3ffc00d34b4f8732
-    resources:
-      cpu: 200
-      memory: 200
-      replicas: 1
-    desiredStatus: Stopped
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: This is the input topic
-        required: true
-        value: csv-data
-      - name: PG_HOST
-        inputType: FreeText
-        description: Host name of Postgres
-        required: true
-        value: pg-2d5ac3c4-quix-b98e.a.aivencloud.com
-      - name: PG_PORT
-        inputType: FreeText
-        description: Port of Postgres
-        required: true
-        value: 10180
-      - name: PG_USER
-        inputType: FreeText
-        description: Username of Postgres
-        required: true
-        value: avnadmin
-      - name: PG_PASSWORD
-        inputType: Secret
-        description: Password of Postgres
-        required: true
-        secretKey: PG_PASSWORD
-      - name: PG_DATABASE
-        inputType: FreeText
-        description: Database name of Postgres
-        required: true
-        value: defaultdb
-      - name: PG_SCHEMA
-        inputType: FreeText
-        description: Schema name of Postgres
-        required: true
-        value: public
-      - name: MAX_QUEUE_SIZE
-        inputType: FreeText
-        description: Max queue size for the sink ingestion
-        required: true
-        value: 50
   - name: Postgres CDC
     application: Postgres CDC
     deploymentType: Service
@@ -161,6 +111,56 @@ deployments:
         description: ''
         required: false
         value: ''
+  - name: Postgres Connector - not working
+    application: Postgres
+    deploymentType: Service
+    version: 5a93d6da95f4ceefa07485ac3ffc00d34b4f8732
+    resources:
+      cpu: 200
+      memory: 200
+      replicas: 1
+    desiredStatus: Stopped
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: This is the input topic
+        required: true
+        value: csv-data
+      - name: PG_HOST
+        inputType: FreeText
+        description: Host name of Postgres
+        required: true
+        value: pg-2d5ac3c4-quix-b98e.a.aivencloud.com
+      - name: PG_PORT
+        inputType: FreeText
+        description: Port of Postgres
+        required: true
+        value: 10180
+      - name: PG_USER
+        inputType: FreeText
+        description: Username of Postgres
+        required: true
+        value: avnadmin
+      - name: PG_PASSWORD
+        inputType: HiddenText
+        description: Password of Postgres
+        required: true
+        value: PG_PASSWORD
+      - name: PG_DATABASE
+        inputType: FreeText
+        description: Database name of Postgres
+        required: true
+        value: defaultdb
+      - name: PG_SCHEMA
+        inputType: FreeText
+        description: Schema name of Postgres
+        required: true
+        value: public
+      - name: MAX_QUEUE_SIZE
+        inputType: FreeText
+        description: Max queue size for the sink ingestion
+        required: true
+        value: 50
 
 # This section describes the Topics of the data pipeline
 topics:
