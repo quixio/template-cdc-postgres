@@ -5,16 +5,21 @@ import os
 import psycopg2 as p2
 from psycopg2 import sql
 
+DB=os.getenv("PG_DATABASE")
+HOST=os.getenv("PG_HOST")
+PORT=os.getenv("PG_PORT")
+USER=os.getenv("PG_USER")
+PWD=os.getenv("PG_PWD")
 
 # Function to insert data into the database
 def insert_data(uid, stream_id, timestamp, data):
     # Connect to your postgres DB
     conn = p2.connect(
-        dbname="your_dbname",
-        user="your_username",
-        password="your_password",
-        host="your_host",
-        port="your_port"
+        dbname=DB,
+        user=USER,
+        password=PWD,
+        host=HOST,
+        port=PORT
     )
 
     # Open a cursor to perform database operations
